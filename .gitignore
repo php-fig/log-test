@@ -1,0 +1,8 @@
+/vendor/
+/.idea
+/.env
+/.env.example
+/docker/
+/docker-compose.yml
+/.editorconfig
+/.phpunit.result.cache
