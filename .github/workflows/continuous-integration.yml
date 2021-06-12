@@ -7,8 +7,10 @@ jobs:
       matrix:
         php-versions: ['5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0']
         dependency-levels:
-          - 'lowest'
           - 'highest'
+        include:
+          - php-versions: 5.5
+            dependency-levels: 'lowest'
 
     steps:
     - uses: actions/checkout@v2
