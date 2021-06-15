@@ -25,6 +25,7 @@ jobs:
             dependency-levels: 'lowest'
           - php-versions: 5.3
             continue-on-error: true
+    continue-on-error: ${{matrix.continue-on-error}}
 
     steps:
     - uses: actions/checkout@v2
