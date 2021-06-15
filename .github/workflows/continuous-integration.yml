@@ -19,12 +19,12 @@ jobs:
         dependency-levels:
           - 'highest'
         continue-on-error:
-          - false
+          - 'false'
         include:
           - php-versions: 5.4
             dependency-levels: 'lowest'
           - php-versions: 5.3
-            continue-on-error: true
+            continue-on-error: 'true'
     continue-on-error: ${{ matrix.continue-on-error }}
 
     steps:
