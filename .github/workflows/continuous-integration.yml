@@ -18,9 +18,13 @@ jobs:
           - 8.0
         dependency-levels:
           - 'highest'
+        continue-on-error:
+          - false
         include:
-          - php-versions: 5.5
+          - php-versions: 5.4
             dependency-levels: 'lowest'
+          - php-versions: 5.3
+            continue-on-error: true
 
     steps:
     - uses: actions/checkout@v2
