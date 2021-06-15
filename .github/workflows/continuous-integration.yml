@@ -23,7 +23,9 @@ jobs:
         include:
           - php-versions: 5.4
             dependency-levels: 'lowest'
+            continue-on-error: false
           - php-versions: 5.3
+            dependency-levels: 'highest'
             continue-on-error: true
     continue-on-error: ${{ matrix.continue-on-error }}
 
