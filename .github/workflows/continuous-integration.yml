@@ -18,16 +18,16 @@ jobs:
           - 8.0
         dependency-levels:
           - 'highest'
-        continue-on-error:
+        experimental:
           - false
         include:
           - php-versions: 5.4
             dependency-levels: 'lowest'
-            continue-on-error: false
+            experimental: false
           - php-versions: 5.3
             dependency-levels: 'highest'
-            continue-on-error: true
-    continue-on-error: ${{ matrix.continue-on-error }}
+            experimental: true
+    continue-on-error: ${{ matrix.experimental }}
 
     steps:
     - uses: actions/checkout@v2
