@@ -23,13 +23,6 @@ jobs:
         include:
           - php-versions: 5.4
             dependency-levels: 'lowest'
-            experimental: false
-          - php-versions: 5.3
-            dependency-levels: 'highest'
-            experimental: true
-        exclude:
-          - php-versions: 5.3
-            experimental: false
     continue-on-error: ${{ matrix.experimental }}
 
     steps:
