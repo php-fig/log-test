@@ -61,3 +61,5 @@ jobs:
 
     - name: PHPCS
       run: ./vendor/bin/phpcs -s --report-source --runtime-set ignore_warnings_on_exit 1
+      # Because PHPCS 2 does not have PSR-12 rule
+      if: matrix.php-versions != '5.3'
