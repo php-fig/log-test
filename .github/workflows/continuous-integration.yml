@@ -47,7 +47,7 @@ jobs:
       run: composer validate
 
       # Because PHPCS 3 requires PHP 5.4
-    - run: composer require --dev -W squizlabs/php_codesniffer:^2.0 symfony/yaml:^2.0
+    - run: composer require --dev -W squizlabs/php_codesniffer:^2.0 symfony/yaml:^2.0 phpdocumentor/reflection-docblock:^2.0
       if: matrix.php-versions == '5.3'
 
     - name: Install dependencies
