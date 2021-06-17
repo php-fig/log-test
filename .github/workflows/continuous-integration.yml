@@ -46,6 +46,10 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate
 
+      # Because PHPCS 3 requires PHP 5.4
+    - run: composer require squizlabs/php_codesniffer:^2.0
+      if: matrix.php-versions == '5.3'
+
     - name: Install dependencies
       uses: ramsey/composer-install@v1
       with:
