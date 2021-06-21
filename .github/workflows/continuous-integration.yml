@@ -24,6 +24,7 @@ jobs:
           - php-versions: 5.4
             dependency-levels: 'lowest'
             experimental: false
+      fail-fast: false
     continue-on-error: ${{ matrix.experimental }}
 
     steps:
