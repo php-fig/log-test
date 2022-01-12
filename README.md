@@ -42,10 +42,10 @@ If the project supports older versions of PHP:
 
 The version of `psr/log-utils` that is installed after composer dependencies resolution varies with the version of `psr/log`.
 
-| psr/log      | psr/log-utils |                                                 |
-|--------------|---------------|-------------------------------------------------|
-| `^1.1.14`    | `1.0.*`       | Empty package, classes a provided by `psr/log`. |
-| `^2.0|^3.0`  | `^1.1`        | Imports test classes removed from `psr/log`.    |
+| psr/log       | psr/log-utils |                                                 |
+|---------------|---------------|-------------------------------------------------|
+| `^1.1.14`     | `1.0.*`       | Empty package, classes a provided by `psr/log`. |
+| `^2.0\|^3.0`  | `^1.1`        | Imports test classes removed from `psr/log`.    |
 
 [`psr/log`]: https://packagist.org/packages/psr/log
 [PSR-3]: https://www.php-fig.org/psr/psr-3/
