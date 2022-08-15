@@ -17,7 +17,7 @@ For PHP 8.0+ only, you may remove support for `psr/log: 1.x`:
     "psr/log": "^2.0 | ^3.0"
   },
   "require-dev": {
-    "psr/log-utils": "^1.1"
+    "fig/log-test": "^1.1"
   }
 }
 ```
@@ -30,7 +30,7 @@ If the project supports older versions of PHP:
     "psr/log": "^1.1.14 | ^2.0"
   },
   "require-dev": {
-    "psr/log-utils": "^1.0"
+    "fig/log-test": "^1.0"
   }
 }
 ```
@@ -40,9 +40,9 @@ If the project supports older versions of PHP:
 
 ## Versions
 
-The version of `psr/log-utils` that is installed after composer dependencies resolution varies with the version of `psr/log`.
+The version of `fig/log-test` that is installed after composer dependencies resolution varies with the version of `psr/log`.
 
-| psr/log       | psr/log-utils |                                                 |
+| psr/log       | fig/log-test |                                                 |
 |---------------|---------------|-------------------------------------------------|
 | `^1.1.14`     | `1.0.*`       | Empty package, classes a provided by `psr/log`. |
 | `^2.0\|^3.0`  | `^1.1`        | Imports test classes removed from `psr/log`.    |
