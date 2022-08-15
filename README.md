@@ -1,5 +1,5 @@
-# PSR - Log Util
-Utilities for the [`psr/log`][] package that backs the [PSR-3][] specification.
+# FIG - Log Test
+Testing utilities for the [`psr/log`][] package that backs the [PSR-3][] specification.
 
  * `Psr\Log\Test\LoggerInterfaceTest` provides a base test class for ensuring compliance with the LoggerInterface.
  * `Psr\Log\Test\TestLogger` is a mock class for testing purposes.
