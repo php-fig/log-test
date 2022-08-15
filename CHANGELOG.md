@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Initial release. This ports the test for and from [`psr/log` v1.1][], according to
 [decision][1].
 
-
 [`psr/log`]: https://packagist.org/packages/psr/log
 [1]: https://github.com/php-fig/log/pull/76#issuecomment-858743302
+
+## [0.0.0] - 2022-08-15
+
+- Unreleased. Transitioned from the psr/log-util package to the fig/log-test package due to policy discussion.

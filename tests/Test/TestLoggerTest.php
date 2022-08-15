@@ -1,6 +1,6 @@
 <?php
 
-namespace Psr\Log\Tests\Test;
+namespace Fig\Log\Tests\Test;
 
 use Psr\Log\Test\LoggerInterfaceTest;
 use Psr\Log\Test\TestLogger;

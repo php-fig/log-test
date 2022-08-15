@@ -1,6 +1,6 @@
 {
-  "name": "psr/log-util",
-  "description": "Utilities for the psr/log package that backs the PSR-3 specification.",
+  "name": "fig/log-test",
+  "description": "Test utilities for the psr/log package that backs the PSR-3 specification.",
   "license": "MIT",
   "authors": [
     {
@@ -19,7 +19,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Psr\\Log\\Tests\\": "tests"
+      "Fig\\Log\\Tests\\": "tests"
     }
   }
 }
