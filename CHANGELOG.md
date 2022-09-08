@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - YYYY-MM-DD
+### Added
+- Import classes from [`psr/log`][] `v1.1.4`, for compatibility with `v2.0.0` and `v3.0.0`.
+
 ## [1.0.0] - 2022-09-07
 ### Changed
 - Compatible with PHP 7.4 and 8.x. Dropped support for lower versions as Test class is marked @requires PHP 7.4

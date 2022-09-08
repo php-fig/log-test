@@ -43,9 +43,9 @@ If the project supports older versions of PHP:
 The version of `fig/log-test` that is installed after composer dependencies resolution varies with the version of `psr/log`.
 
 | psr/log       | fig/log-test |                                                 |
-|---------------|---------------|-------------------------------------------------|
-| `^1.1.14`     | `1.0.*`       | Empty package, classes a provided by `psr/log`. |
-| `^2.0\|^3.0`  | `^1.1`        | Imports test classes removed from `psr/log`.    |
+|---------------|--------------|-------------------------------------------------|
+| `^1.1.14`     | `1.0.*`      | Empty package, classes a provided by `psr/log`. |
+| `^2.0\|^3.0`  | `^1.1`       | Imports test classes removed from `psr/log`.    |
 
 [`psr/log`]: https://packagist.org/packages/psr/log
 [PSR-3]: https://www.php-fig.org/psr/psr-3/
