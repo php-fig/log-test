@@ -54,7 +54,7 @@ abstract class LoggerInterfaceTest extends TestCase
         $this->assertEquals($expected, $this->getLogs());
     }
 
-    public function provideLevelsAndMessages()
+    public static function provideLevelsAndMessages()
     {
         return [
             LogLevel::EMERGENCY => [LogLevel::EMERGENCY, 'message of level emergency with context: {user}'],
