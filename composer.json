@@ -1,6 +1,7 @@
 {
   "name": "fig/log-test",
   "description": "Test utilities for the psr/log package that backs the PSR-3 specification.",
+  "keywords": ["testing"],
   "license": "MIT",
   "authors": [
     {
