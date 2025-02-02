@@ -79,7 +79,7 @@ class TestLoggerTest extends LoggerInterfaceTest
         $this->assertTrue(call_user_func([$logger, $levelMethod.'ThatPasses'], fn (array $record) => $record['message'] === $level.' Message'), $levelMethod.'ThatMatches');
     }
 
-    public function getLogLevels(): array
+    public static function getLogLevels(): array
     {
         return [
             ['debug'],
