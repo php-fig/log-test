@@ -52,31 +52,43 @@ class TestLoggerTest extends LoggerInterfaceTest
      */
     public function testHasRecord(string $level): void
     {
-        $levelMethod = 'has'.ucfirst($level);
+        $levelMethod = 'has' . ucfirst($level);
         $logger = $this->getLogger();
 
-        $this->assertFalse(call_user_func([$logger, $levelMethod.'Records']));
+        $this->assertFalse(call_user_func([$logger, $levelMethod . 'Records']));
 
-        $logger->log($level, $level.' Message', ['foo' => 'bar']);
-        $logger->log($level, $level.' Hello');
+        $logger->log($level, $level . ' Message', ['foo' => 'bar']);
+        $logger->log($level, $level . ' Hello');
 
-        $this->assertTrue(call_user_func([$logger, $levelMethod.'Records']));
+        $this->assertTrue(call_user_func([$logger, $levelMethod . 'Records']));
 
-        $record = $level.' Message';
+        $record = $level . ' Message';
         $this->assertTrue($logger->hasRecord($record, $level), 'hasRecord without context');
-        $this->assertTrue(call_user_func([$logger, $levelMethod], $record), $levelMethod.' without context');
+        $this->assertTrue(call_user_func([$logger, $levelMethod], $record), $levelMethod . ' without context');
 
-        $record = ['message' => $level.' Message'];
+        $record = ['message' => $level . ' Message'];
         $this->assertTrue($logger->hasRecord($record, $level), 'hasRecord without context');
-        $this->assertTrue(call_user_func([$logger, $levelMethod], $record), $levelMethod.' without context');
+        $this->assertTrue(call_user_func([$logger, $levelMethod], $record), $levelMethod . ' without context');
 
-        $record = ['message' => $level.' Message', ['foo' => 'bar']];
+        $record = ['message' => $level . ' Message', ['foo' => 'bar']];
         $this->assertTrue($logger->hasRecord($record, $level), 'hasRecord with context');
-        $this->assertTrue(call_user_func([$logger, $levelMethod], $record), $levelMethod.' with context');
+        $this->assertTrue(call_user_func([$logger, $levelMethod], $record), $levelMethod . ' with context');
 
-        $this->assertTrue(call_user_func([$logger, $levelMethod.'ThatContains'], 'Message'), $levelMethod.'ThatContains');
-        $this->assertTrue(call_user_func([$logger, $levelMethod.'ThatMatches'], '/^[a-z]+ Message$/i'), $levelMethod.'ThatMatches');
-        $this->assertTrue(call_user_func([$logger, $levelMethod.'ThatPasses'], fn (array $record) => $record['message'] === $level.' Message'), $levelMethod.'ThatMatches');
+
+        $this->assertTrue(
+            call_user_func([$logger, $levelMethod . 'ThatContains'], 'Message'),
+            $levelMethod . 'ThatContains'
+        );
+        $this->assertTrue(
+            call_user_func([$logger, $levelMethod . 'ThatMatches'], '/^[a-z]+ Message$/i'),
+            $levelMethod . 'ThatMatches'
+        );
+
+        $passesCallback = fn (array $record) => $record['message'] === $level . ' Message';
+        $this->assertTrue(
+            call_user_func([$logger, $levelMethod . 'ThatPasses'], $passesCallback),
+            $levelMethod . 'ThatPasses'
+        );
     }
 
     public static function getLogLevels(): array
