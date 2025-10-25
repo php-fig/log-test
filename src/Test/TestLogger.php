@@ -9,12 +9,16 @@ use Psr\Log\LoggerTrait;
  * Used for testing purposes.
  *
  * It records all records and gives you access to them for verification.
+ *
+ * @psalm-type log_record_array array{level: string, message: string|\Stringable, context: array{exception?: \Throwable}}
  */
 class TestLogger implements LoggerInterface
 {
     use LoggerTrait;
 
+    /** @var list<log_record_array> */
     public array $records = [];
+    /** @var array<array-key, list<log_record_array>> */
     public array $recordsByLevel = [];
 
     /**
@@ -42,7 +46,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param array|string $record
+     * @param log_record_array|string $record
      * @param string $level
      * @return bool
      */
@@ -120,41 +124,65 @@ class TestLogger implements LoggerInterface
         throw new \BadMethodCallException('Call to undefined method ' . get_class($this) . '::' . $method . '()');
     }
 
+    /**
+     * @param log_record_array|string $record
+     */
     public function hasEmergency($record): bool
     {
         return $this->hasRecord($record, 'emergency');
     }
 
+    /**
+     * @param log_record_array|string $record
+     */
     public function hasAlert($record): bool
     {
         return $this->hasRecord($record, 'alert');
     }
 
+    /**
+     * @param log_record_array|string $record
+     */
     public function hasCritical($record): bool
     {
         return $this->hasRecord($record, 'critical');
     }
 
+    /**
+     * @param log_record_array|string $record
+     */
     public function hasError($record): bool
     {
         return $this->hasRecord($record, 'error');
     }
 
+    /**
+     * @param log_record_array|string $record
+     */
     public function hasWarning($record): bool
     {
         return $this->hasRecord($record, 'warning');
     }
 
+    /**
+     * @param log_record_array|string $record
+     */
     public function hasNotice($record): bool
     {
         return $this->hasRecord($record, 'notice');
     }
 
+    /**
+     * @param log_record_array|string $record
+     */
     public function hasInfo($record): bool
     {
         return $this->hasRecord($record, 'info');
     }
 
+    /**
+     * @param log_record_array|string $record
+     */
     public function hasDebug($record): bool
     {
         return $this->hasRecord($record, 'debug');
@@ -200,41 +228,73 @@ class TestLogger implements LoggerInterface
         return $this->hasRecords('debug');
     }
 
+    /**
+     * @param string $message
+     * @return bool
+     */
     public function hasEmergencyThatContains($message): bool
     {
         return $this->hasRecordThatContains($message, 'emergency');
     }
 
+    /**
+     * @param string $message
+     * @return bool
+     */
     public function hasAlertThatContains($message): bool
     {
         return $this->hasRecordThatContains($message, 'alert');
     }
 
+    /**
+     * @param string $message
+     * @return bool
+     */
     public function hasCriticalThatContains($message): bool
     {
         return $this->hasRecordThatContains($message, 'critical');
     }
 
+    /**
+     * @param string $message
+     * @return bool
+     */
     public function hasErrorThatContains($message): bool
     {
         return $this->hasRecordThatContains($message, 'error');
     }
 
+    /**
+     * @param string $message
+     * @return bool
+     */
     public function hasWarningThatContains($message): bool
     {
         return $this->hasRecordThatContains($message, 'warning');
     }
 
+    /**
+     * @param string $message
+     * @return bool
+     */
     public function hasNoticeThatContains($message): bool
     {
         return $this->hasRecordThatContains($message, 'notice');
     }
 
+    /**
+     * @param string $message
+     * @return bool
+     */
     public function hasInfoThatContains($message): bool
     {
         return $this->hasRecordThatContains($message, 'info');
     }
 
+    /**
+     * @param string $message
+     * @return bool
+     */
     public function hasDebugThatContains($message): bool
     {
         return $this->hasRecordThatContains($message, 'debug');
@@ -320,6 +380,9 @@ class TestLogger implements LoggerInterface
         return $this->hasRecordThatPasses($predicate, 'debug');
     }
 
+    /**
+     * @return void
+     */
     public function reset()
     {
         $this->records = [];
