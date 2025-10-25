@@ -116,4 +116,12 @@ class TestLoggerTest extends LoggerInterfaceTest
         $this->assertFalse($logger->hasDebugThatMatches('/warning message/'));
         $this->assertFalse($logger->hasDebugThatPasses(fn (array $record) => 'warning message' === $record['message']));
     }
+
+    public function testPlaceholderInterpolation() : void
+    {
+        $logger = new TestLogger(true);
+        $message = 'User {username} created';
+        $logger->debug($message, ['username' => 'bolivar']);
+        $this->assertTrue($logger->hasDebugThatContains('User bolivar created'));
+    }
 }
