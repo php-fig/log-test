@@ -17,11 +17,22 @@ class TestLogger implements LoggerInterface
     public array $records = [];
     public array $recordsByLevel = [];
 
+    private bool $placeholderInterpolation;
+
+    public function __construct(bool $placeholderInterpolation = false)
+    {
+        $this->placeholderInterpolation = $placeholderInterpolation;
+    }
+
     /**
      * @inheritdoc
      */
     public function log($level, string|\Stringable $message, array $context = []): void
     {
+        if ($this->placeholderInterpolation === true) {
+            $message = $this->interpolate($message, $context);
+        }
+
         $record = [
             'level' => $level,
             'message' => $message,
@@ -325,4 +336,27 @@ class TestLogger implements LoggerInterface
         $this->records = [];
         $this->recordsByLevel = [];
     }
+
+    /**
+     * Interpolates context values into the message placeholders.
+     *
+     * @param string|\Stringable $message
+     * @param array $context
+     * @return string
+     */
+    private function interpolate($message, array $context = []) : string
+    {
+        // build a replacement array with braces around the context keys
+        $replace = array();
+        foreach ($context as $key => $val) {
+            // check that the value can be cast to string
+            if (!is_array($val) && (!is_object($val) || method_exists($val, '__toString'))) {
+                $replace['{' . $key . '}'] = $val;
+            }
+        }
+
+        // interpolate replacement values into the message and return
+        return strtr($message, $replace);
+    }
+
 }
