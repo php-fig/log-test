@@ -42,7 +42,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param array $record
+     * @param array|string $record
      * @param string $level
      * @return bool
      */
