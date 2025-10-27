@@ -5,7 +5,5 @@
 
     <file>tests</file>
 
-    <config name="installed_paths" value="../../slevomat/coding-standard"/>
-
     <rule ref="PSR12"/>
 </ruleset>
