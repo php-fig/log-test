@@ -33,12 +33,19 @@ abstract class LoggerInterfaceTest extends TestCase
      */
     abstract public function getLogs();
 
+    /**
+     * @return void
+     */
     public function testImplements()
     {
         $this->assertInstanceOf(LoggerInterface::class, $this->getLogger());
     }
 
     /**
+     * @param string $level
+     * @param string|\Stringable $message
+     * @return void
+     *
      * @dataProvider provideLevelsAndMessages
      */
     public function testLogsAtAllLevels($level, $message)
@@ -54,6 +61,9 @@ abstract class LoggerInterfaceTest extends TestCase
         $this->assertEquals($expected, $this->getLogs());
     }
 
+    /**
+     * @return array<LogLevel::*, array{0: LogLevel::*, 1: literal-string}>
+     */
     public static function provideLevelsAndMessages()
     {
         return [
@@ -68,6 +78,9 @@ abstract class LoggerInterfaceTest extends TestCase
         ];
     }
 
+    /**
+     * @return void
+     */
     public function testThrowsOnInvalidLevel()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -75,6 +88,9 @@ abstract class LoggerInterfaceTest extends TestCase
         $logger->log('invalid level', 'Foo');
     }
 
+    /**
+     * @return void
+     */
     public function testContextReplacement()
     {
         $logger = $this->getLogger();
@@ -84,6 +100,9 @@ abstract class LoggerInterfaceTest extends TestCase
         $this->assertEquals($expected, $this->getLogs());
     }
 
+    /**
+     * @return void
+     */
     public function testObjectCastToString()
     {
         $dummy = $this->createPartialMock(DummyTest::class, ['__toString']);
@@ -97,6 +116,9 @@ abstract class LoggerInterfaceTest extends TestCase
         $this->assertEquals($expected, $this->getLogs());
     }
 
+    /**
+     * @return void
+     */
     public function testContextCanContainAnything()
     {
         $closed = fopen('php://memory', 'r');
@@ -120,6 +142,9 @@ abstract class LoggerInterfaceTest extends TestCase
         $this->assertEquals($expected, $this->getLogs());
     }
 
+    /**
+     * @return void
+     */
     public function testContextExceptionKeyCanBeExceptionOrOtherValues()
     {
         $logger = $this->getLogger();
