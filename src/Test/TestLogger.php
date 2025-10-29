@@ -11,6 +11,7 @@ use Psr\Log\LoggerTrait;
  * It records all records and gives you access to them for verification.
  *
  * @psalm-type log_record_array array{level: string, message: string|\Stringable, context: array{exception?: \Throwable}}
+ * @psalm-type has_record_array array{level?: string, message?: string|\Stringable, context?: array<array-key, mixed>}
  */
 class TestLogger implements LoggerInterface
 {
@@ -57,7 +58,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      * @param string $level
      * @return bool
      */
@@ -136,7 +137,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      */
     public function hasEmergency($record): bool
     {
@@ -144,7 +145,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      */
     public function hasAlert($record): bool
     {
@@ -152,7 +153,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      */
     public function hasCritical($record): bool
     {
@@ -160,7 +161,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      */
     public function hasError($record): bool
     {
@@ -168,7 +169,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      */
     public function hasWarning($record): bool
     {
@@ -176,7 +177,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      */
     public function hasNotice($record): bool
     {
@@ -184,7 +185,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      */
     public function hasInfo($record): bool
     {
@@ -192,7 +193,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param log_record_array|string $record
+     * @param has_record_array|string $record
      */
     public function hasDebug($record): bool
     {
