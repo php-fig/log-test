@@ -33,6 +33,8 @@ class TestLogger implements LoggerInterface
      */
     public function log($level, string|\Stringable $message, array $context = []): void
     {
+        assert(isset($context['exception']) ? $context['exception'] instanceof \Throwable : true);
+
         if ($this->placeholderInterpolation === true) {
             $message = $this->interpolate($message, $context);
         }
