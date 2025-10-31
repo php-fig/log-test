@@ -10,7 +10,7 @@ use Psr\Log\LoggerTrait;
  *
  * It records all records and gives you access to them for verification.
  *
- * @psalm-type log_record_array array{level: string, message: string|\Stringable, context: array{exception?: \Throwable}}
+ * @psalm-type log_record_array array{level: string, message: string|\Stringable, context: mixed[]}
  */
 class TestLogger implements LoggerInterface
 {
