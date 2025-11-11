@@ -1,11 +1,10 @@
 name: Testing
 on:
-  pull_request: ~
+  pull_request:
   push:
-    branches:
-      - main
   schedule:
-    - cron: "30 6 * * 1"
+    - cron: "30 6 1 * *"
+
 jobs:
   build:
     runs-on: ubuntu-latest
