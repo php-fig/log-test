@@ -38,7 +38,7 @@ class TestLogger implements LoggerInterface
             $message = $this->interpolate($message, $context);
         }
 
-        $level = $this->normalizeLevel($level);
+        $level = self::normalizeLevel($level);
 
         $record = [
             'level' => $level,
@@ -56,7 +56,7 @@ class TestLogger implements LoggerInterface
      */
     public function hasRecords($level)
     {
-        return isset($this->recordsByLevel[$this->normalizeLevel($level)]);
+        return isset($this->recordsByLevel[self::normalizeLevel($level)]);
     }
 
     /**
@@ -78,7 +78,7 @@ class TestLogger implements LoggerInterface
                 return false;
             }
             return true;
-        }, $this->normalizeLevel($level));
+        }, self::normalizeLevel($level));
     }
 
     /**
@@ -88,7 +88,7 @@ class TestLogger implements LoggerInterface
      */
     public function hasRecordThatContains($message, $level)
     {
-        return $this->hasRecordThatPasses(fn ($rec) => str_contains($rec['message'], $message), $this->normalizeLevel($level));
+        return $this->hasRecordThatPasses(fn ($rec) => str_contains($rec['message'], $message), self::normalizeLevel($level));
     }
 
     /**
@@ -98,7 +98,7 @@ class TestLogger implements LoggerInterface
      */
     public function hasRecordThatMatches($regex, $level)
     {
-        return $this->hasRecordThatPasses(fn ($rec) => preg_match($regex, $rec['message']) > 0, $this->normalizeLevel($level));
+        return $this->hasRecordThatPasses(fn ($rec) => preg_match($regex, $rec['message']) > 0, self::normalizeLevel($level));
     }
 
     /**
@@ -108,7 +108,7 @@ class TestLogger implements LoggerInterface
      */
     public function hasRecordThatPasses(callable $predicate, $level)
     {
-        $level = $this->normalizeLevel($level);
+        $level = self::normalizeLevel($level);
 
         if (!isset($this->recordsByLevel[$level])) {
             return false;
