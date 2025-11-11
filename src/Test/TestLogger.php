@@ -10,7 +10,7 @@ use Psr\Log\LoggerTrait;
  *
  * It records all records and gives you access to them for verification.
  *
- * @psalm-type log_record_array array{level: mixed, message: string|\Stringable, context: mixed[]}
+ * @psalm-type log_record_array array{level: string|int, message: string|\Stringable, context: mixed[]}
  * @psalm-type has_record_array array{level?: mixed, message?: string|\Stringable, context?: array<array-key, mixed>}
  */
 class TestLogger implements LoggerInterface
@@ -430,7 +430,7 @@ class TestLogger implements LoggerInterface
     /**
      * @param mixed $level
      */
-    private function normalizeLevel($level): int|string
+    protected static function normalizeLevel($level): int|string
     {
         if ($level instanceof \UnitEnum) {
             $level = $level->value;
