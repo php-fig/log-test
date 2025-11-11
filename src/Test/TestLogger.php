@@ -51,7 +51,7 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param mixed $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecords($level)
@@ -61,7 +61,7 @@ class TestLogger implements LoggerInterface
 
     /**
      * @param has_record_array|string $record
-     * @param mixed $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecord($record, $level)
@@ -83,7 +83,7 @@ class TestLogger implements LoggerInterface
 
     /**
      * @param string $message
-     * @param mixed $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecordThatContains($message, $level)
@@ -93,7 +93,7 @@ class TestLogger implements LoggerInterface
 
     /**
      * @param string $regex
-     * @param mixed $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecordThatMatches($regex, $level)
@@ -103,7 +103,7 @@ class TestLogger implements LoggerInterface
 
     /**
      * @param callable $predicate
-     * @param mixed $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecordThatPasses(callable $predicate, $level)
