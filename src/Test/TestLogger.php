@@ -10,8 +10,8 @@ use Psr\Log\LoggerTrait;
  *
  * It records all records and gives you access to them for verification.
  *
- * @psalm-type log_record_array array{level: string, message: string|\Stringable, context: mixed[]}
- * @psalm-type has_record_array array{level?: string, message?: string|\Stringable, context?: array<array-key, mixed>}
+ * @psalm-type log_record_array array{level: string|int, message: string|\Stringable, context: mixed[]}
+ * @psalm-type has_record_array array{level?: mixed, message?: string|\Stringable, context?: array<array-key, mixed>}
  */
 class TestLogger implements LoggerInterface
 {
@@ -38,6 +38,8 @@ class TestLogger implements LoggerInterface
             $message = $this->interpolate($message, $context);
         }
 
+        $level = self::normalizeLevel($level);
+
         $record = [
             'level' => $level,
             'message' => $message,
@@ -49,17 +51,17 @@ class TestLogger implements LoggerInterface
     }
 
     /**
-     * @param string $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecords($level)
     {
-        return isset($this->recordsByLevel[$level]);
+        return isset($this->recordsByLevel[self::normalizeLevel($level)]);
     }
 
     /**
      * @param has_record_array|string $record
-     * @param string $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecord($record, $level)
@@ -76,36 +78,38 @@ class TestLogger implements LoggerInterface
                 return false;
             }
             return true;
-        }, $level);
+        }, self::normalizeLevel($level));
     }
 
     /**
      * @param string $message
-     * @param string $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecordThatContains($message, $level)
     {
-        return $this->hasRecordThatPasses(fn ($rec) => str_contains($rec['message'], $message), $level);
+        return $this->hasRecordThatPasses(fn ($rec) => str_contains($rec['message'], $message), self::normalizeLevel($level));
     }
 
     /**
      * @param string $regex
-     * @param string $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecordThatMatches($regex, $level)
     {
-        return $this->hasRecordThatPasses(fn ($rec) => preg_match($regex, $rec['message']) > 0, $level);
+        return $this->hasRecordThatPasses(fn ($rec) => preg_match($regex, $rec['message']) > 0, self::normalizeLevel($level));
     }
 
     /**
      * @param callable $predicate
-     * @param string $level
+     * @param string|int|\Stringable|\UnitEnum $level
      * @return bool
      */
     public function hasRecordThatPasses(callable $predicate, $level)
     {
+        $level = self::normalizeLevel($level);
+
         if (!isset($this->recordsByLevel[$level])) {
             return false;
         }
@@ -408,7 +412,7 @@ class TestLogger implements LoggerInterface
      * @param array $context
      * @return string
      */
-    private function interpolate($message, array $context = []) : string
+    private function interpolate($message, array $context = []): string
     {
         // build a replacement array with braces around the context keys
         $replace = array();
@@ -423,4 +427,23 @@ class TestLogger implements LoggerInterface
         return strtr($message, $replace);
     }
 
+    /**
+     * @param mixed $level
+     */
+    private static function normalizeLevel($level): int|string
+    {
+        if ($level instanceof \UnitEnum) {
+            $level = $level->value;
+        }
+
+        if ($level instanceof \Stringable) {
+            $level = (string) $level;
+        }
+        
+        if (is_string($level) || is_int($level)) {
+            return $level;
+        }
+
+        throw new \InvalidArgumentException('The given level of type "'.gettype($level).'" could not be normalized to a string or int.');
+    }
 }
