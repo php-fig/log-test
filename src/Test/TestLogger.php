@@ -427,10 +427,7 @@ class TestLogger implements LoggerInterface
         return strtr($message, $replace);
     }
 
-    /**
-     * @param mixed $level
-     */
-    private static function normalizeLevel($level): int|string
+    private static function normalizeLevel(mixed $level): int|string
     {
         if ($level instanceof \UnitEnum) {
             $level = $level->value;
